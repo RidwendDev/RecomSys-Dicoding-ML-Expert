@@ -122,6 +122,49 @@ Dalam proyek kali saya memanfaatkan teknik umum seperti Content-Based Filtering 
 
 Berikut setiap tahapan yang dilakukan dalam proses modelling:
   
+### **Content-Based Filtering**
+Pada metode ini hal pertama yang dilakukan yaitu _feature engineering_ dengan library TfidfVectorizer dari scikit-learn. Proses yang dilakukan menggunakan library TfidfVectorizer adalah tokenisasi fitur `Book-Author` sebab fitur inilah yang akan kita jadikan acuan utama sistem rekomendasi. Output yang dihasilkan adalah berbentuk matrix categorical. 
+<img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/tfid.png?raw=true'>
+
+Lalu, kita akan melakukan penghitungan derajat kesetaraan (similarity degree) antar buku dengan Cosine Similarity. Adapun formulanya seperti berikut ini:<br>
+<img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/cosinerums.png?raw=true' width=70%/>
+
+Kemudian, supaya dapat top-N recommendation kita  harus mengambil nilai dengan k tertinggi. Pada proyek ini saya memanfaatkan fungsi argpartition dari numpy untuk mendapatkan top k tertinggi pada similarity data. Lalu sistem yang dibangun dapat menampilkan buku yang direkomendasikan berdasarkan pengarang yang sama dari buku yang telah dibaca sebelumnya. Adapun Teknik Content-Based Filtering ini memiliki kelebihan dan kekurangan-nya sebagai berikut.
+
+* Kelebihan:</br>
+    * Model tidak memerlukan data apa pun tentang pengguna lain, karena rekomendasinya khusus untuk pengguna ini. Ini membuatnya lebih mudah untuk menskalakan ke sejumlah besar pengguna.
+    * Model dapat menangkap minat khusus pengguna, dan dapat merekomendasikan item khusus yang sangat sedikit diminati pengguna lain.
+
+* Kekurangan:</br>
+    * Model hanya dapat membuat rekomendasi berdasarkan minat pengguna yang ada. Dengan kata lain, model memiliki kemampuan terbatas untuk memperluas minat pengguna yang ada.
+    * Tidak mampu menentukan secara baik preferensi yang  tepat pada user baru.
+
+Dalam case kali ini saya akan mengambil pengarang William Shakespeare sebagai acuan untuk menentukan top 10 rekomendasi buku berdasarkan pengarang yang sama:</br>
+
+<img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/bukuref.png?raw=true'>
+
+<img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/10bukucbf.png?raw=true'>
+
+Terlihat sistem rekomendasi yang kita buat dengan Content-Based Filtering menghasilkan rekomendasi yang sangat baik dimana top-10 yang direkomendasikan semua pengarangnya sama.
+
+
+### **Collaborative Filtering**
+Pada teknik ini proses pembuatan sistem rekomendasi memanfaatkan model Deep Learning. Langkah yang pertama yaitu dengan menggabungkan data buku dan rating. Setelah itu melakukan penyandian terhadap data `User-ID` dan `ISBN` serta memisahkan data latih dan data validasi dengan ratio 80:20. Kemudian membuat model untuk melakukan training data. Model menggunakan operasi perkalian dot product antara embedding users dan books. Skornya ditetapkan dalam skala 0 sampai 1 dengan fungsi aktivasi sigmoid. Untuk mendapatkan hasil rekomendasi, dipilih `User-ID` secara acak lalu dilakukan penyaringan daftar buku yang belum pernah dibaca oleh user. Pada teknik collaborative filtering kelebihan dan kekurangan-nya antara lain sebagai berikut.
+* Kelebihan
+    * Tidak memerlukan domain knowladge karena _embeddings systemnya_ akan otomatis _learn by pattern_.
+    * Dapat membuat rekomendasi tanpa harus selalu menggunakan dataset yang _large_.
+    * Sangat menguntungkan dari segi kecepatan dan skalabilitas.
+
+* Kekurangan
+    *  Sulit untuk menyertakan fitur lain untuk melakukan kueri item
+    *  Membutuhkan parameter rating/skor,jadi rasanya cukup sulit jika item baru masuk karena sistem tidak akan merekomendasikan item tersebut.
+
+Berikut merupakan hasil rekomendasi buku kepada user dengan ID: 76352</br>
+
+<img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/top10bukucf.png?raw=true'>
+
+
+
   
   
   
