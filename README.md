@@ -61,6 +61,76 @@ Pada proyek ini saya hanya akan memanfaatkan 2 file data, yaitu:
 Berikutnya kita akan melakukan tahapan EDA, hal-hal yang dilakukan antara lain:
 * Memeriksa informasi singkat dari data:
   * Books
+  <img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/Screenshot%202022-09-11%20072722.png?raw=true'>
+  
+  Berdasarkan data books tersebut terdapat 271360 entri dan seluruh tipe data dalam kolom books adalah object.
+  <img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/judul.png?raw=true'>
+  
+  Dari data ini dapat kita lihat judul buku paling banyak adalah Selected Poems diikuti Little women dan Wuthering Heights.
+  <img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/author.png?raw=true'>
+  
+  Dari data ini dapat kita lihat pengarang buku paling banyak adalah Agatha Cristie diikuti William Shakespeare dan Stephenn King.
+  <img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/pnrbit.png?raw=true'>
+  
+  Dari data ini dapat kita lihat penerbit buku paling banyak adalah Harlequin diikuti Siihoute dan Pocket.
+  
+  * Ratings
+  <img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/ingporating.png?raw=true'>
+  
+  Didalam data ratings terdapat 1149780 entri dan terdapat 2 tipe pada data yaitu number(int64) untuk User-ID dan Book-Rating serta object untuk ISBN.<br>
+  <img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/vizrating.png?raw=true'>
+  
+  Terlihat dari visualisasi bahwa range rating ada diantara nilai 0 sampai dengan 10 dan buku paling banyak adalah dengan rating 0 dari user yang sebanyak 716109       buku.
+  
+* Memeriksa mising value
+<img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/msvalue.png?raw=true'>
+
+Terlihat bahwa terdapat beberapa kolom yang memiliki nilai missing value pada data book sedangkan untuk ratings bersih tanpa missing value
+
+## **Data Preparation**
+Data preparation ini diperlukan untuk mempersiapkan data agar ketika dilakukan proses pengembangan model kita mendapatkan hasil rekomendasi yang baik. Yang saya lakukan dalam tahap _Data Preparation_ kali ini antara lain:
+
+* Menghapus data yang tidak diperlukan</br>
+<img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/sleksifiktur.png?raw=true'>
+
+Sistem rekomendasi yang saya bangun hanya memerlukan data author dan rating sebagai fitur untuk model. Kolom-kolom data seperti `Year-Of-Publication, Publisher, Image-URL-M, Image-URL-L` tidak akan saya gunakan untuk sistem rekomendasi dengan teknik _Content-Based Filtering_.
+
+* Melakukan penggabungan data</br>
+<img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/mergingdata.png?raw=true'>
+
+Menggabungkan data buku dan rating menjadi satu sehingga dapat memudahkan dalam proses train modelnya.
+
+* Mendrop duplikasi data</br>
+<img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/dropduplikasi.png?raw=true'>
+
+Drop duplikasi data yang dilakukan yaitu data yang memiliki judul buku sama tetapi memiliki ISBN yang berbeda.
+
+* Menangani niali missing value<br/>
+Cara yang dilakukan di case kali ini adalah dengan mendrop data yang terdapat missing value karena jika menggunakan _imputation_ cukup rumit padahal data yang missing value hanya sedikit.
+
+* Menyeleksi data</br>
+Untuk menghasilkan output rekomendasi yang baik disini saya menyeleksi dengan menggunakan pandas between dimana data yang diolah hanya yang ada di range 50 sampai 100. Untuk angka 100 ini diset guna mengurangi nilai outlier yang jauh seperti terdapat data buku yang memilki ratings 900+
+
+* Melakukan normalisasi data rating</br>
+Melakukan transformasi pada data fitur yang akan ditrain oleh model menggunakan library MinMaxScaler dari scikit-learn. Kita akan mentransformasikan fitur dengan scalling fitur ke rentang tertentu, dengan range default antara nol dan satu.
+
+* Split dataset</br>
+Membagi dataset menjadi data latih (train) dan data uji (test) merupakan hal yang harus kita lakukan sebelum membuat model.Data latih adalah sekumpulan data yang akan digunakan oleh model untuk melakukan pelatihan. Sedangkan, data uji adalah sekumpulan data yang akan digunakan untuk memvalidasi kinerja pada model yang telah dilatih. Proporsi pembagian yang saya lakukan pada dataset ini menggunakan proporsi pembagian 80:20 yang berarti sebanyak 80% merupakan data latih dan 20% persen merupakan data uji.
+
+## **Modeling and Result**
+Dalam proyek kali saya memanfaatkan teknik umum seperti Content-Based Filtering dan Collaborative Filtering. Untuk Content-Based Filtering akan menggunakan metode Cosine Similarity, sedangkan Collaborative Filtering menggunakan metode model based dengan Deep Learning. 
+
+Berikut setiap tahapan yang dilakukan dalam proses modelling:
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
 
 
