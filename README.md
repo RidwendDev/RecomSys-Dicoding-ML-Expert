@@ -164,8 +164,38 @@ Berikut merupakan hasil rekomendasi buku kepada user dengan ID: 76352</br>
 <img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/top10bukucf.png?raw=true'>
 
 
+## **Evaluation**
+Evaluasi yang akan dilakukan pada proyek ini yaitu evaluasi dengan Precision Content untuk Content-Based Filtering serta Root Mean Squared Error (RMSE) untuk Collaborative Filtering.
 
-  
+### **Content-Based Filtering**
+Evaluasi pada teknik ini menggunakan metrik precision content untuk menghitung tingkat presisi sistem dari rekomendasi yang dibuat. Cara menghitung metric precision content cukup sederhana yaitu dengan membagikan jumlah rekomendasi yang relevan dan jumlah total rekomendasi yang diberikan oleh sistem lalu akan didapatkan hasil tingkat presisi sisem dalam melakukan rekomendasi. 
+
+Hasil metric Presision:</br>
+<img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/bukuref.png?raw=true'>
+
+<img src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/10bukucbf.png?raw=true'><br>
+
+Untuk menentukan hasil dari metrik ini yaitu dengan melakukan analisa pada buku yang akan dijadikan sebagai acuan. Di case ini kita mengambil buku romeo and juliet karangan William Shakespeare dari sini disimpulkan tingkat presisi dari sistem rekomendasi dengan teknik CBF yang kita buat dapat merekomendasikan sampai menembus 100% karena 10/10. Tetapi hal ini sebenarnya tidak lepas pula dengan banyaknya buku yang dikarang oleh William Shakespeare jadi data kita dapat mengenalinya dengan lebih baik.
+
+
+### **Collaborative Filtering**
+Metrik evaluasi yang digunakan untuk mengukur performa dari model ini yaitu dengan menggunakan metrik Root Mean Squared Error (RMSE). Semakin rendah nilai root mean square error juga menandakan semakin baik model tersebut dalam melakukan prediksi. Adapun formula sederhana yang digunakan RMSE adalah sebagai berikut.</br>
+
+<image src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/rmse%20rumus.jpg?raw=true' width=70% /></br>
+
+<image src='https://github.com/RidwendDev/RecomSys-Dicoding-ML-Expert/blob/main/img/vismetriks.png?raw=true' width=70% /></br>
+
+Dari visualisasi model metriks tersebut dapat disimpulkan bahwa nilai konvergen metriks RMSE berada di sekitar angka 0.28 untuk training dan sekitar 0.34 untuk validasi. Jadi nilai tersebut sudah cukup baik untuk sistem rekomendasi.
+
+## **Conslusion**
+Dari semua proses pemaparan pembuatan model sampai tahap pengujian kita dapatkan sebuah kesimpulan model yang dibangun untuk sistem rekomendasi sederhana yang kita buat telah memiliki performa yang cukup bagus, baik dalam teknik Content-Based Filtering maupun Collaborative Filtering. Hal ini sesuai dengan tujuan kita yakni guna membangun sistem rekomendasi yang berguna untuk mengenali pattern yang baik sesuai dengan preferensi masyarakat. 
+
+## **Reference**
+Adistia, L. D., Akhriza, T. M., &amp; Jatmiko, S. (2019). Sistem Rekomendasi Buku untuk perpustakaan Perguruan tinggi berbasis association rule. Jurnal RESTI (Rekayasa Sistem Dan Teknologi Informasi), 3(2), 304–312. https://doi.org/10.29207/resti.v3i2.971 
+
+
+
+
   
   
   
